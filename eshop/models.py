@@ -5,14 +5,14 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class Category(models.Model):
 	name = models.CharField(max_length=20)
 	
-	def ___str__(self):
+	def __str__(self):
 		return self.name
 
 class Product(models.Model):
 	name = models.CharField(max_length=20)
 	price = models.DecimalField(max_digits=7,decimal_places=2)
 	quantity = models.IntegerField(validators=[MinValueValidator(0)])
-	image = models.ImageField(upload_to=None)
+	image = models.ImageField()
 	description = models.TextField()
 	rating = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
 	category = models.ForeignKey('eshop.Category', on_delete=models.CASCADE,related_name='Category')
