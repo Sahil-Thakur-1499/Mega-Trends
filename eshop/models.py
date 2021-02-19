@@ -27,6 +27,9 @@ class User(models.Model):
 	phone = models.DecimalField(max_digits=10,decimal_places=0,null=False, blank=False, unique=True)
 	address = models.TextField()
 
+	def __str__(self):
+		return self.name
+
 class Item(models.Model):
 	product = models.ForeignKey('eshop.Product', on_delete=models.CASCADE,related_name='Product')
 	qty = models.IntegerField()

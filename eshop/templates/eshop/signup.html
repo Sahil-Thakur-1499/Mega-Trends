@@ -1,0 +1,11 @@
+{% extends 'eshop/base.html' %}
+
+{% block content %}
+<div class="container">
+	<h2>New User</h2>
+	<form method="POST" class="signup-form">{% csrf_token %}
+		{{ form.as_p }}
+		<button type="submit" class="save btn btn-default">Sign Up</button>
+	</form>
+</div>
+{% endblock %}

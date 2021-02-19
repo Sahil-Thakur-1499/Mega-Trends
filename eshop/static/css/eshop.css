@@ -15,6 +15,35 @@ footer {
   padding: 25px;
 }
 img {
-  vertical-align: middle;
-  border-style: none;
+    float: left;
+    width:  100px;
+    height: 100px;
+    object-fit: cover;
+}
+.dropdown button {
+  background-color: inherit; 
+  border: none;
+  color: grey;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.button{
+  background-color: inherit; 
+  border: none;
+  color: grey;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+.dropdown {
+  background-color: inherit; 
+  border: none;
+  color: grey;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
 }
