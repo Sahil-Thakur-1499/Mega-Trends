@@ -28,12 +28,12 @@
 						<span class="caret"></span></button>
 						<ul class="dropdown-menu">
 							{% for category in categories %}
-							<li><a href="#">{{category.name}}</a></li>
+							<li><a href="{% url 'category_detail' pk=category.name %}">{{category.name}}</a></li>
 							{% endfor %}
 						</ul>
 					</div></li>
 				<li><a href="{% url 'signup' %}">Sign Up</a></li>
-				<li><a href="#">Contact Us</a></li>
+				<li><a href="{% url 'contact_us' %}">Contact Us</a></li>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="/admin"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
