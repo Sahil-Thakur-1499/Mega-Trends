@@ -9,12 +9,13 @@ def home(request):
     return render(request, 'eshop/home.html', {'products':products,'categories':categories})
 
 def signup(request):
-    if request.method == "POST":
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            user = form.save(commit=False)
-            user.save()
-            return redirect('home')
-    else:
-        form = SignUpForm()
-    return render(request, 'eshop/signup.html', {'form': form})
+	categories=Category.objects.all()
+	if request.method == "POST":
+		form = SignUpForm(request.POST)
+		if form.is_valid():
+			user = form.save(commit=False)
+			user.save()
+			return redirect('home')
+	else:
+		form = SignUpForm()
+		return render(request, 'eshop/signup.html', {'form': form,'categories':categories})

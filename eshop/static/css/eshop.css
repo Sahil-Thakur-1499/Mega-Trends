@@ -21,7 +21,6 @@ img {
     object-fit: cover;
 }
 .dropdown button {
-  margin-top: 8px;
   background-color: inherit; 
   border: none;
   color: grey;
