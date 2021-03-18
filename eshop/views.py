@@ -1,6 +1,8 @@
 from django.shortcuts import render,redirect,get_object_or_404
 from .models import *
 from .forms import SignUpForm
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import login, authenticate
 
 # Create your views here.
 def home(request):
@@ -13,8 +15,16 @@ def signup(request):
 	if request.method == "POST":
 		form = SignUpForm(request.POST)
 		if form.is_valid():
-			user = form.save(commit=False)
+			user = form.save()
+			user.refresh_from_db()
+			user.customer.name= form.cleaned_data.get('name')
+			user.customer.phone= form.cleaned_data.get('phone')
+			user.customer.email= form.cleaned_data.get('email')
+			user.customer.address= form.cleaned_data.get('address')
 			user.save()
+			raw_password = form.cleaned_data.get('password1')
+			user = authenticate(username=user.username, password=raw_password)
+			login(request, user)
 			return redirect('home')
 	else:
 		form = SignUpForm()

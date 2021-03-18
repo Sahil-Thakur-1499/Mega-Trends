@@ -1,5 +1,8 @@
 from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 # Create your models here.
 class Category(models.Model):
@@ -20,15 +23,20 @@ class Product(models.Model):
 	def __str__(self):
 		return self.name
 
-class User(models.Model):
-	name = models.CharField(max_length=20)
-	email = models.EmailField(max_length=255, unique=True)
-	password = models.CharField(max_length=10)
-	phone = models.DecimalField(max_digits=10,decimal_places=0,null=False, blank=False, unique=True)
-	address = models.TextField()
-
-	def __str__(self):
-		return self.name
+class Customer(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    name=models.CharField(max_length=50,null=True)
+    phone=models.CharField(max_length=10,null=True)
+    email=models.EmailField(null=True)
+    address=models.TextField(null=True)
+    
+    def __str__(self):
+        return self.user.username        
+    @receiver(post_save, sender=User)
+    def update_user_profile(sender, instance, created, **kwargs):
+        if created:
+            Customer.objects.create(user=instance)
+        instance.customer.save()
 
 class Item(models.Model):
 	product = models.ForeignKey('eshop.Product', on_delete=models.CASCADE,related_name='Product')
@@ -38,8 +46,8 @@ class Item(models.Model):
 		return product.price*qty
 
 class Cart(models.Model):
-	user = models.ForeignKey('eshop.User', on_delete=models.CASCADE,related_name='User')
-	items = models.ManyToManyField('eshop.Item', blank=True)
+	customer=models.ForeignKey('eshop.Customer', on_delete=models.CASCADE,related_name='Customer')
+	items = models.ForeignKey('eshop.Item',on_delete=models.CASCADE,related_name='Item')
 	amount = models.DecimalField(max_digits=7,decimal_places=2)
 
 class Order(models.Model):

@@ -4,47 +4,51 @@
 	<title>Mega Trends</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-	<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{% static 'css/eshop.css' %}">
 </head>
 <body>
-	<div class="jumbotron">
-		<div class="container text-center">
-			<h1>Mega Trends</h1>      
-		</div>
-	</div>
-	<nav class="navbar navbar-inverse">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<p><span class="glyphicon glyphicon-sunglasses" style="font-size:42px;color:grey;"></span></p>    
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="height:100px">
+		<a class="navbar-brand ml-4 mr-4" href="/"><b>Mega Trends</b></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="navbar-nav">
+				<a class="nav-item nav-link" style="margin-top:6" href="{% url 'home' %}">Home</a>
+				<div class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" style="margin-top:6" href="#" id="navbardrop" data-toggle="dropdown">
+						Categories
+					</a>
+					<div class="dropdown-menu">
+						{% for category in categories %}
+						<a class="dropdown-item" href="{% url 'category_detail' pk=category.name %}">{{category.name}}</a>
+						{% endfor %}
+					</div>
+				</div>
+				<a class="nav-item nav-link" style="margin-top:6" href="{% url 'contact_us' %} ">Contact Us</a>
 			</div>
-			<ul class="nav navbar-nav">
-				<li><a href="/">Home</a></li>
-				<li><div class="dropdown">
-					<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Categories
-						<span class="caret"></span></button>
-						<ul class="dropdown-menu">
-							{% for category in categories %}
-							<li><a href="{% url 'category_detail' pk=category.name %}">{{category.name}}</a></li>
-							{% endfor %}
-						</ul>
-					</div></li>
-				<li><a href="{% url 'signup' %}">Sign Up</a></li>
-				<li><a href="{% url 'contact_us' %}">Contact Us</a></li>
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				<li><a href="/admin"><span class="glyphicon glyphicon-user"></span> Your Account</a></li>
-				<li><a href="#"><span class="glyphicon glyphicon-shopping-cart"></span> Cart</a></li>
-			</ul>
+				<div class="navbar-nav ml-auto">
+				{% if user.is_authenticated %}
+					<div class="nav-item nav-link " style="margin-top:6">Welcome {{ user.username }}</div>
+					<a class="nav-item nav-link btn btn-danger ml-4 text-light" href="{% url 'logout' %}">Logout</a>
+				{% else %}
+					<a class="nav-item nav-link btn btn-success ml-4  text-light" style="margin-top:6" href="{% url 'login' %}">Login</a>
+					<a class="nav-item nav-link btn btn-info ml-3  text-light" style="margin-top:6" href="{% url 'signup' %} ">Sign Up</a>
+				{% endif %}
+				</div>
 		</div>
 	</nav>
 	{% block content %}
 	{% endblock %}
-	<footer class="container-fluid text-center">
-		<p>&#169;  Mega Trends 2021</p>  
+	<footer class="page-footer font-small black">
+		<div class="footer-copyright text-center py-3">&#169;  Mega Trends 2021
+			<br><small class="text-muted">All rights reserved!</small>
+		</div>
 	</footer>
 </body>
 </html>

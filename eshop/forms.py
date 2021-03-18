@@ -1,11 +1,13 @@
 from django import forms
-from .models import User
+from .models import *
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
-class SignUpForm(forms.ModelForm):
-
+class SignUpForm(UserCreationForm):
+    name=forms.CharField(max_length=50)
+    phone=forms.CharField(max_length=10)
+    email=forms.EmailField()
+    address=forms.CharField(widget=forms.Textarea)
     class Meta:
         model = User
-        fields = ('name', 'email','password','phone','address')
-        widgets = {
-            # telling Django your password field in the mode is a password input on the template
-            'password': forms.PasswordInput() }
+        fields = ('username','password1','password2','name','phone','email','address')

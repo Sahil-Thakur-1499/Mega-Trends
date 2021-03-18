@@ -1,23 +1,30 @@
+<style>
+	.card:hover {
+    transform: scale(1.1);
+  }
+ </style>	
 {% extends 'eshop/base.html' %}
 {% block content %}
 	<div class="container">
-		<h2>{{ctg.name}}</h2>
+		<h1>{{ctg.name}}</h1>
+		<hr/><br/>
 		{% for product in products %}
-		{% if forloop.counter0|divisibleby:3 %} <div class="row"> {%  endif %}
+		{% if forloop.counter0|divisibleby:3 %} <div class="card-deck"> {%  endif %}
 			<div class="col-sm-4">
-				{% if forloop.counter0|divisibleby:2 %}
-				<div class="panel panel-info">
-					{% else %}
-					<div class="panel panel-success">
-						{%  endif %}
-						<div class="panel-heading" align="center">{{ product.name }}</div>
-						<div class="panel-body"><img src="{{product.image.url}}" class="img-responsive" style="width:100% ; height:50% ; object-fit:contain;" alt="Image"></div>
-						<div class="panel-footer" align="center"><b>Rs.{{product.price}}</b></div>
+					<div class="shadow-sm bg-white rounded" style="box-shadow: 0rem 0rem 0.4rem 0.4rem rgba(0,0,0,0.15)!important;border-radius: 1rem!important;">
+					<div class="card" style="margin-right:auto;margin-bottom: auto;margin-left:auto;transition: transform 0.2s ease; box-shadow: 0 4px 6px 0 rgba(0,0, 0, 0.5);border-radius: 0.5rem; border: 0; margin-bottom: 0.5em;">
+						<a href="#"><img class="card-img-top" src="{{product.image.url}}" alt="Card image cap" style="width: 100%;height: 260;object-fit: contain;margin-top: 4;margin-bottom: 6;"></a>
+						<div class="card-footer bg-light">
+							<h5 class="card-title text-info" style="font-size: 22pt">{{ product.name }}</h5>
+							<p class="card-text"style="font-size: 14pt">&#8377; {{product.price}}
+							<a href="#" class="card-link btn btn-danger btn-sm  float-right" style="height: auto">Add to Cart</a></p>
+						</div>
 					</div>
-				</div>
+				</div></div>
 			{% if forloop.counter|divisibleby:3 %} </div> <br>{%  endif %}
 			{% endfor %}
-		</div>
+		<!-- </div> -->
 	</div>
+</div>
 {% endblock %}
 
