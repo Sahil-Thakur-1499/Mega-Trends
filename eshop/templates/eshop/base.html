@@ -10,10 +10,12 @@
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="{% static 'css/eshop.css' %}">
+	<link rel="shortcut icon" href="{% static 'images/logo1.ico' %}">
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="height:100px">
-		<a class="navbar-brand ml-4 mr-4" href="/"><b>Mega Trends</b></a>
+		<a href="{% url 'home' %}"><img src="{% static 'images/logo.jpg' %}" alt="IMR" style="float:left;height:100px;width:160px;object-fit: unset"></a>
+		<a class="navbar-brand" href="/"><b>Mega Trends</b></a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
@@ -26,7 +28,7 @@
 					</a>
 					<div class="dropdown-menu">
 						{% for category in categories %}
-						<a class="dropdown-item" href="{% url 'category_detail' pk=category.name %}">{{category.name}}</a>
+						<a class="dropdown-item" href="{% url 'category_detail' pk=category.name flr='price_asc' %}">{{category.name}}</a>
 						{% endfor %}
 					</div>
 				</div>

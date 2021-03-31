@@ -30,12 +30,26 @@ def signup(request):
 		form = SignUpForm()
 		return render(request, 'eshop/signup.html', {'form': form,'categories':categories})
 
-def category_detail(request,pk):
+def category_detail(request,pk,flr):
 	categories=Category.objects.all()
 	ctg = get_object_or_404(Category, name=pk)
-	products = Product.objects.filter(category=ctg.pk)
-	return render(request, 'eshop/category_detail.html', {'products':products,'categories':categories,'ctg':ctg})
+	if flr=='price_asc':
+		products = Product.objects.filter(category=ctg.pk).order_by('price')
+	elif flr=='price_desc':
+		products = Product.objects.filter(category=ctg.pk).order_by('-price')
+	elif flr=='rtg_asc':
+		products = Product.objects.filter(category=ctg.pk).order_by('rating')
+	elif flr=='rtg_desc':
+		products = Product.objects.filter(category=ctg.pk).order_by('-rating')
+	return render(request, 'eshop/category_detail.html', {'products':products,'categories':categories,'ctg':ctg,'flr':flr})
 
 def contact_us(request):
     categories=Category.objects.all()
     return render(request, 'eshop/contact_us.html', {'categories':categories})
+
+def product_detail(request,pk):
+	categories=Category.objects.all()
+	product = get_object_or_404(Product,id=pk)
+	ctg = get_object_or_404(Category, name=product.category.name)
+	r=range(product.rating+1,6)
+	return render(request, 'eshop/product_detail.html', {'product':product,'categories':categories,'ctg':ctg,'r':r})
