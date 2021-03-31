@@ -3,6 +3,7 @@ from .models import *
 from .forms import SignUpForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
+from django.contrib import messages
 
 # Create your views here.
 def home(request):
@@ -53,3 +54,34 @@ def product_detail(request,pk):
 	ctg = get_object_or_404(Category, name=product.category.name)
 	r=range(product.rating+1,6)
 	return render(request, 'eshop/product_detail.html', {'product':product,'categories':categories,'ctg':ctg,'r':r})
+@login_required(login_url='login')
+def atc(request,pk):
+	categories=Category.objects.all()
+	product = get_object_or_404(Product,id=pk)
+	customer=get_object_or_404(Customer,user=request.user)
+	item, created = Item.objects.get_or_create(product=product)
+	cart=Cart.objects.filter(customer=customer)
+	if cart.exists():
+		cart = cart[0]
+		if cart.items.filter(product=product).exists():
+			item.qty += 1
+			item.save()
+			cart.amount+=item.price()/item.qty
+			cart.save()
+			messages.info(request, "Item qty was updated.")
+			return redirect("/product-detail/"+str(product.pk),{'categories':categories})
+		else:
+			cart.items.add(item)
+			cart.amount+=item.price()
+			cart.save()
+			messages.info(request, "Item was added to your cart.")
+			return redirect("/product-detail/"+str(product.pk),{'categories':categories})
+	else:
+		cart=Cart()
+		cart.customer=customer
+		cart.amount=item.price()
+		cart.save()
+		cart.items.add(item)
+		cart.save()
+		messages.info(request, "Item was added to your cart.")
+		return redirect("/product-detail/"+str(product.pk),{'categories':categories})

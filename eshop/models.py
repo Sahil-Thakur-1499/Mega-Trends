@@ -23,6 +23,7 @@ class Product(models.Model):
 	def __str__(self):
 		return self.name
 
+
 class Customer(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     name=models.CharField(max_length=50,null=True)
@@ -40,15 +41,20 @@ class Customer(models.Model):
 
 class Item(models.Model):
 	product = models.ForeignKey('eshop.Product', on_delete=models.CASCADE,related_name='Product')
-	qty = models.IntegerField()
-
+	qty = models.IntegerField(default=1)
+	
 	def price(self):
-		return product.price*qty
+		return self.product.price*self.qty
+	def __str__(self):
+			return self.product.name
 
 class Cart(models.Model):
 	customer=models.ForeignKey('eshop.Customer', on_delete=models.CASCADE,related_name='Customer')
-	items = models.ForeignKey('eshop.Item',on_delete=models.CASCADE,related_name='Item')
+	# items = models.ForeignKey('eshop.Item',on_delete=models.CASCADE,related_name='Item')
+	items=models.ManyToManyField('eshop.Item')
 	amount = models.DecimalField(max_digits=7,decimal_places=2)
+	def __str__(self):
+			return self.customer.name
 
 class Order(models.Model):
 	ordered_date = models.DateTimeField(blank=True, null=True)

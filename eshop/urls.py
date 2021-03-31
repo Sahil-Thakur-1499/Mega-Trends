@@ -11,5 +11,6 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='eshop/login.html'), name='login'),
     path('accounts/logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     path('product-detail/<str:pk>', views.product_detail,name="product_detail"),
+    path('add_to_cart/<str:pk>',views.atc,name="atc"),
     
 ]
