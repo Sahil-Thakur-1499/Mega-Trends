@@ -42,7 +42,7 @@ class Customer(models.Model):
 class Item(models.Model):
 	product = models.ForeignKey('eshop.Product', on_delete=models.CASCADE,related_name='Product')
 	qty = models.IntegerField(default=1)
-	
+	customer=models.ForeignKey('eshop.Customer', on_delete=models.CASCADE,related_name='Customer2')
 	def price(self):
 		return self.product.price*self.qty
 	def __str__(self):
@@ -60,3 +60,5 @@ class Order(models.Model):
 	ordered_date = models.DateTimeField(blank=True, null=True)
 	pmntsts = models.BooleanField(default=False)
 	cart = models.ForeignKey('eshop.Cart', on_delete=models.CASCADE,related_name='Cart')
+	def __str__(self):
+			return self.cart.customer.name

@@ -1,0 +1,136 @@
+<style>
+.quantity {
+    float: left;
+    margin-right: 15px;
+    background-color: #eee;
+    position: relative;
+    width: 80px;
+    overflow: hidden
+}
+
+.quantity input {
+    margin: 0;
+    text-align: center;
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    float: right;
+    color: #000;
+    font-size: 20px;
+    border: 0;
+    outline: 0;
+    background-color: #F6F6F6
+}
+
+.quantity input.qty {
+    position: relative;
+    border: 0;
+    width: 100%;
+    height: 40px;
+    padding: 10px 25px 10px 10px;
+    text-align: center;
+    font-weight: 400;
+    font-size: 15px;
+    border-radius: 0;
+    background-clip: padding-box
+}
+
+.quantity .minus, .quantity .plus {
+    line-height: 0;
+    background-clip: padding-box;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    -webkit-background-size: 6px 30px;
+    -moz-background-size: 6px 30px;
+    color: #bbb;
+    font-size: 20px;
+    position: absolute;
+    height: 50%;
+    border: 0;
+    right: 0;
+    padding: 0;
+    width: 25px;
+    z-index: 3
+}
+
+.quantity .minus:hover, .quantity .plus:hover {
+    background-color: #dad8da
+}
+
+.quantity .minus {
+    bottom: 0
+}
+.shopping-cart {
+    margin-top: 20px;
+}
+</style>
+{% extends 'eshop/base.html' %}
+{% block content %}
+<div class="container">
+   <div class="card shopping-cart">
+            <div class="card-header bg-dark text-light">
+                <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: 34pt"></i>
+                <a href="{%url 'home' %}" class="btn btn-outline-info btn-sm pull-right">Continue Shopping</a>
+                <div class="clearfix"></div>
+            </div>
+            <div class="card-body">
+            	{% if c is 0 %}
+            	<strong>CART EMPTY :( </strong>
+            	{% else %}
+            	{% for item in cart.items.all %}
+                    <!-- PRODUCT -->
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-2 text-center">
+                                <a href="{% url 'product_detail' pk=item.product.pk %}"><img class="img-responsive" src="{{item.product.image.url}}" alt="prewiew" style="width:160; height:180"></a>
+                        </div>
+                        <div class="col-12 text-sm-center col-sm-12 text-md-left col-md-6">
+                            <a href="{% url 'product_detail' pk=item.product.pk %}"><h4 class="product-name"><strong>{{item.product.name}}</strong></h4></a>
+                            <h4>
+                                <small>{{item.product.description|make_list|slice:'0:150'|join:''}}......</small>
+                            </h4>
+                        </div>
+                        <div class="col-12 col-sm-12 text-sm-center col-md-4 text-md-right row">
+                            <div class="col-3 col-sm-3 col-md-6 text-md-right" style="padding-top: 5px">
+                                <h6><strong>{{item.product.price}} <span class="text-muted">x</span></strong></h6>
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-4">
+                                <div class="quantity">
+                                    <a href="{% url 'plus' pk=item.pk %}"><input type="button" value="+" class="plus"></a>
+                                    <input type="number" value="{{item.qty}}" title="Qty" class="qty"
+                                           size="4" disabled>
+                                    <a href="{% url 'minus' pk=item.pk %}"><input type="button" value="-" class="minus"></a>
+                                </div>
+                            </div>
+                            <div class="col-2 col-sm-2 col-md-2 text-right">
+                                <a href="{% url 'delitem' pk=item.pk %}" type="button" class="btn btn-outline-danger btn-xs" style="width:40">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+           		{% endfor %}
+           		{% endif %}
+            </div>
+            <div class="card-footer">
+                <div class="coupon col-md-5 col-sm-5 no-padding-left pull-left">
+                    <div class="row">
+                        <div class="col-6">
+                            <input type="text" class="form-control" placeholder="cupone code">
+                        </div>
+                        <div class="col-6">
+                            <input type="submit" class="btn btn-default" value="Use cupone">
+                        </div>
+                    </div>
+                </div>
+                <div class="pull-right" style="margin: 10px">
+                    <a href="{% url 'checkout' pk=cart.pk %}" class="btn btn-success pull-right">Checkout</a>
+                    <div class="pull-right" style="margin: 5px">
+                        Total price: <b>&#8377;{{cart.amount}}</b>
+                    </div>
+                </div>
+            </div>
+        </div>
+</div>
+{% endblock %}

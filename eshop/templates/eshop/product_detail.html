@@ -185,8 +185,12 @@
 						<p class="product-description">{{product.description}}</p>
 						<h4 class="price">Price: <span>&#8377; {{product.price}}</span></h4>
 						<div class="action">
-							<a href="#"><button class="card-link btn btn-danger btn-sm  float-left" style="height: auto">Add to cart</button>
-						</a></div>
+							{% if product.quantity > 0 %}	
+							<a href="{% url 'atc' pk=product.pk %}"><button class="card-link btn btn-danger btn-sm  float-left" style="height: auto">Add to cart</button></a>
+							{% else %}
+							<div class="float-right"><b>Out Of Stock</b></div>
+							{% endif %}		
+						</div>
 					</div>
 				</div>
 			</div>

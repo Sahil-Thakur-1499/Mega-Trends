@@ -67,7 +67,11 @@
 						<div class="card-footer bg-light">
 							<a href="{% url 'product_detail' pk=product.pk %}"><h5 class="card-title text-info" style="font-size: 22pt">{{ product.name }}</h5></a>
 							<p class="card-text"style="font-size: 14pt">&#8377; {{product.price}}
+							{% if product.quantity > 0 %}
 							<a href="{% url 'atc' pk=product.pk %}" class="card-link btn btn-danger btn-sm  float-right" style="height: auto">Add to Cart</a></p>
+							{% else %}
+							<div class="card-text float-right" style="color:gray;"> Out Of Stock</div></p>
+							{% endif %}
 							<div class="rating">
 							<div class="stars">
 								{% for i in "x"|ljust:product.rating %}

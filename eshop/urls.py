@@ -12,5 +12,10 @@ urlpatterns = [
     path('accounts/logout/', auth_views.LogoutView.as_view(next_page='/'), name='logout'),
     path('product-detail/<str:pk>', views.product_detail,name="product_detail"),
     path('add_to_cart/<str:pk>',views.atc,name="atc"),
+    path('mycart/',views.v_cart,name="v_cart"),
+    path('mycart/del/<str:pk>',views.delitem,name="delitem"),
+    path('mycart/plus/<str:pk>',views.plus,name="plus"),
+    path('mycart/minus/<str:pk>',views.minus,name="minus"),
+    path('checkout/<str:pk>',views.checkout,name="checkout"),
     
 ]

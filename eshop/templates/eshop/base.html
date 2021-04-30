@@ -9,8 +9,22 @@
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 	<link rel="stylesheet" href="{% static 'css/eshop.css' %}">
 	<link rel="shortcut icon" href="{% static 'images/logo1.ico' %}">
+	<script>
+		$(document).ready(function(){
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
+	<style>
+		.tooltip-inner {
+			color: white;
+			text-align: center;
+			background-color: red;
+			border-radius: .25rem;
+		}
+	</style>
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top" style="height:100px">
@@ -37,6 +51,11 @@
 				<div class="navbar-nav ml-auto">
 				{% if user.is_authenticated %}
 					<div class="nav-item nav-link " style="margin-top:6">Welcome {{ user.username }}</div>
+					{% if c is 0 %}
+					<a href="{% url 'v_cart' %}" class="nav-item nav-link " data-toggle="tooltip" title="Cart Empty"><i class="fa fa-shopping-cart" style="color:lightgreen;font-size: 24pt"></i></a>
+					{% else %}
+					<a href="{% url 'v_cart' %}" class="nav-item nav-link " data-toggle="tooltip" title="Items: {{cart.items.all.count}}"><i class="fa fa-shopping-cart" style="color:lightgreen;font-size: 24pt"></i></a>
+					{% endif %}
 					<a class="nav-item nav-link btn btn-danger ml-4 text-light" href="{% url 'logout' %}">Logout</a>
 				{% else %}
 					<a class="nav-item nav-link btn btn-success ml-4  text-light" style="margin-top:6" href="{% url 'login' %}">Login</a>
