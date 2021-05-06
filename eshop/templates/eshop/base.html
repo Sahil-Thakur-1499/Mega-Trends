@@ -50,7 +50,7 @@
 			</div>
 				<div class="navbar-nav ml-auto">
 				{% if user.is_authenticated %}
-					<div class="nav-item nav-link " style="margin-top:6">Welcome {{ user.username }}</div>
+					<div class="nav-item nav-link " style="margin-top:6">Welcome <a href="{% url 'profile' %}" style="color:rgba(255,255,255,.5)">{{ user.username }}</a></div>
 					{% if c is 0 %}
 					<a href="{% url 'v_cart' %}" class="nav-item nav-link " data-toggle="tooltip" title="Cart Empty"><i class="fa fa-shopping-cart" style="color:lightgreen;font-size: 24pt"></i></a>
 					{% else %}

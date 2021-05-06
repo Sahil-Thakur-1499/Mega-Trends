@@ -62,3 +62,13 @@ class Order(models.Model):
 	cart = models.ForeignKey('eshop.Cart', on_delete=models.CASCADE,related_name='Cart')
 	def __str__(self):
 			return self.cart.customer.name
+
+class Placed_Order(models.Model):
+	i=models.IntegerField(default=0)
+	ordered_date = models.DateTimeField(blank=True, null=True)
+	customer=models.ForeignKey('eshop.Customer', on_delete=models.CASCADE,related_name='Customer3')
+	amount=models.DecimalField(max_digits=7,decimal_places=2)
+	items=models.CharField(max_length=9999,null=True)
+	status=models.CharField(max_length=50,null=True)
+	def __str__(self):
+		return self.customer.name

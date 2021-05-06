@@ -114,18 +114,10 @@
            		{% endif %}
             </div>
             <div class="card-footer">
-                <div class="coupon col-md-5 col-sm-5 no-padding-left pull-left">
-                    <div class="row">
-                        <div class="col-6">
-                            <input type="text" class="form-control" placeholder="cupone code">
-                        </div>
-                        <div class="col-6">
-                            <input type="submit" class="btn btn-default" value="Use cupone">
-                        </div>
-                    </div>
-                </div>
                 <div class="pull-right" style="margin: 10px">
+                	{% if c is not 0 %}
                     <a href="{% url 'checkout' pk=cart.pk %}" class="btn btn-success pull-right">Checkout</a>
+                    {% endif %}
                     <div class="pull-right" style="margin: 5px">
                         Total price: <b>&#8377;{{cart.amount}}</b>
                     </div>

@@ -11,3 +11,11 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username','password1','password2','name','phone','email','address')
+
+class UpdateForm(forms.ModelForm):
+    phone=forms.CharField(max_length=10)
+    email=forms.EmailField()
+    address=forms.CharField(widget=forms.Textarea)
+    class Meta:
+        model = User
+        fields = ('phone','email','address')

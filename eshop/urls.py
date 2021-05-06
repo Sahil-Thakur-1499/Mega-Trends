@@ -17,5 +17,8 @@ urlpatterns = [
     path('mycart/plus/<str:pk>',views.plus,name="plus"),
     path('mycart/minus/<str:pk>',views.minus,name="minus"),
     path('checkout/<str:pk>',views.checkout,name="checkout"),
+    path('payment1/<str:pk>', views.payment, name="payment"),
+    path('success/<str:pk>',views.payment_success,name="payment_success"),
+    path('my-account/',views.profile,name="profile"),
     
 ]

@@ -1,0 +1,456 @@
+<style>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
+  body{margin-top:20px;
+    background:#eee;
+  }
+
+/**
+ * User Profile
+ */
+ .user-profile__avatar,
+ .user-avatar {
+  padding: 10px;
+  margin-bottom: 30px;
+  border: 1px solid #eee;
+  border-radius: 3px;
+}
+.user-profile__avatar > img,
+.user-avatar > img {
+  margin-bottom: 10px;
+  border-radius: 2px;
+}
+.user-profile__title {
+  font-weight: 700;
+}
+.user-profile__desc {
+  color: #777777;
+}
+.user-profile__url {
+  margin-bottom: 20px;
+}
+.user-profile__info {
+  margin: 20px 0;
+  padding-left: 0;
+  list-style: none;
+}
+.user-profile__info > li {
+  padding: 5px 0;
+}
+.user-profile__info > li .fa {
+  margin-right: 10px;
+}
+.user-profile__tabs {
+  margin-top: 40px;
+}
+
+
+
+
+/**
+ * Portfolio
+ */
+ /* Portfolio navigation */
+ .portfolio__nav {
+  list-style: none;
+  padding-left: 0;
+  margin-bottom: 40px;
+  margin-top: -20px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.portfolio__nav > li {
+  display: inline-block;
+}
+.portfolio__nav > li > a {
+  display: block;
+  padding: 20px 10px;
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  color: #757575;
+  -webkit-transition: all .05s linear;
+  -o-transition: all .05s linear;
+  transition: all .05s linear;
+}
+.portfolio__nav > li > a:hover,
+.portfolio__nav > li > a:focus {
+  color: #333333;
+  text-decoration: none;
+}
+.portfolio__nav > li.active > a {
+  color: #ed3e49;
+  border-bottom-color: #ed3e49;
+}
+@media (max-width: 767px) {
+  .portfolio__nav {
+    border-bottom: 0;
+  }
+  .portfolio__nav > li {
+    display: block;
+  }
+  .portfolio__nav > li > a {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+  .portfolio__nav > li.active > a {
+    font-weight: 600;
+  }
+}
+/* Portfolio thumbnails */
+.isotope-item {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+/* Firefox bug fix */
+@media (min-width: 1200px) {
+  .col-lg-4.isotope-item {
+    width: 33%;
+  }
+}
+.portfolio__item {
+  margin-bottom: 20px;
+}
+.portfolio-item__img {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+}
+.portfolio-item__img:hover .portfolio-item__mask {
+  background: rgba(255, 255, 255, 0.9);
+}
+.portfolio-item__img:hover .portfolio-item-mask__content {
+  top: 0;
+}
+.portfolio-item__mask {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0);
+  -webkit-transition: background .3s;
+  -o-transition: background .3s;
+  transition: background .3s;
+}
+@media (max-width: 767px) {
+  .portfolio-item__mask {
+    visibility: hidden;
+  }
+}
+.portfolio-item-mask__content {
+  position: absolute;
+  display: block;
+  top: -100%;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 40px 20px;
+  overflow: hidden;
+  color: #333333;
+  text-decoration: none;
+  -webkit-transition: top .3s;
+  -o-transition: top .3s;
+  transition: top .3s;
+}
+.portfolio-item-mask__title {
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.portfolio-item-mask__summary {
+  font-size: 12px;
+}
+.portfolio-item__recent > [class*="col-"] {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.tab-pane {
+  padding-top: 20px;
+}
+
+.panel-body > ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.panel-body > ul > li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.panel-body > ul > li > a {
+  display: block;
+  padding: 8px 0;
+  font-weight: 600;
+  font-size: 11px;
+  color: #777777;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+.emp-profile{
+  padding: 3%;
+  margin-top: 3%;
+  margin-bottom: 3%;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+.profile-img{
+  text-align: center;
+}
+.profile-img img{
+  width: 70%;
+  height: 100%;
+}
+.profile-img .file {
+  position: relative;
+  overflow: hidden;
+  margin-top: -20%;
+  width: 70%;
+  border: none;
+  border-radius: 0;
+  font-size: 15px;
+  background: #212529b8;
+}
+.profile-img .file input {
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+.profile-head h5{
+  color: #333;
+}
+.profile-head h6{
+  color: #0062cc;
+}
+.profile-edit-btn{
+  border: none;
+  border-radius: 1.5rem;
+  width: 70%;
+  padding: 2%;
+  font-weight: 600;
+  color: #6c757d;
+  cursor: pointer;
+}
+.proile-rating{
+  font-size: 12px;
+  color: #818182;
+  margin-top: 5%;
+}
+.proile-rating span{
+  color: #495057;
+  font-size: 15px;
+  font-weight: 600;
+}
+.profile-head .nav-tabs{
+  margin-bottom:5%;
+}
+.profile-head .nav-tabs .nav-link{
+  font-weight:600;
+  border: none;
+}
+.profile-head .nav-tabs .nav-link.active{
+  border: none;
+  border-bottom:2px solid #0062cc;
+}
+.profile-work{
+  padding: 14%;
+  margin-top: -15%;
+}
+.profile-work p{
+  font-size: 12px;
+  color: #818182;
+  font-weight: 600;
+  margin-top: 10%;
+}
+.profile-work a{
+  text-decoration: none;
+  color: #495057;
+  font-weight: 600;
+  font-size: 14px;
+}
+.profile-work ul{
+  list-style: none;
+}
+.profile-tab label{
+  font-weight: 600;
+}
+.profile-tab p{
+  font-weight: 600;
+  color: #0062cc;
+}
+</style>
+{% extends "eshop/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-sm-3">
+      <!-- User name -->
+      <h3 class="user-profile__title">{{customer.name }}</h3>
+
+      <!-- User description -->
+      <p class="user-profile__desc">
+        Regular Customer
+      </p>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          User Menu
+        </div>
+        <div class="panel-body">
+          <ul class="nav nav-tabs" role="tablist" style="display: block">
+            <li role="presentation" class="active">
+              <a href="#user-profile__portfolio" aria-controls="user-profile__portfolio" role="tab" data-toggle="tab" 
+              aria-expanded="true"><i class="fa fa-user"></i> My Profile</a>
+            </li>
+            <li role="presentation" class="">
+              <a href="#user-profile__edit" aria-controls="user-profile__edit" role="tab" data-toggle="tab" 
+              aria-expanded="false"><i class="fa fa-edit"></i> Edit Profile</a>
+            </li>
+            <li role="presentation" class="">
+              <a href="#user-profile__shopping-cart" aria-controls="user-profile__shopping-cart" role="tab" data-toggle="tab" aria-expanded="false"><i class="fa fa-shopping-cart"></i> My Orders</a>
+            </li>
+            <li role="presentation" class="">
+              <a href="{% url 'logout' %}"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <div class="col-sm-9">
+      <div class="row">
+
+        <div class="col-sm-12">
+          <div class="user-profile__tabs">
+            
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane fade active in" id="user-profile__portfolio">             
+                <i class="fa fa-user"></i> My Profile
+                <div class="row">
+                  <div class="col-sm-8 col-md-8 col-lg-6">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label>Username</label>
+                          </div>
+                          <div class="col-md-6">
+                            <p>{{customer.user}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label>Name</label>
+                          </div>
+                          <div class="col-md-6">
+                            <p>{{customer.name}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label>Email</label>
+                          </div>
+                          <div class="col-md-6">
+                            <p>{{customer.email}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label>Phone</label>
+                          </div>
+                          <div class="col-md-6">
+                            <p>{{customer.phone}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label>Address</label>
+                          </div>
+                          <div class="col-md-6">
+                            <p>{{customer.address}}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div></div>
+                  </div> <!-- / .row -->
+                </div> <!-- / .tab-pane -->
+                <div role="tabpanel" class="tab-pane fade" id="user-profile__edit">             
+               <i class="fa fa-edit"></i>  Edit Profile
+                <div class="row">
+                  <div class="col-sm-8 col-md-8 col-lg-6">
+                    <div class="tab-content profile-tab" id="myTabContent">
+                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label>Username</label>
+                          </div>
+                          <div class="col-md-6">
+                            <p>{{customer.user}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <label>Name</label>
+                          </div>
+                          <div class="col-md-6">
+                            <p>{{customer.name}}</p>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-md-6">
+                          <form method="POST" class="owner-form">{% csrf_token %}
+                            <table>
+                              {{ form|crispy}}
+                            </table>
+                            <button type="submit" class="save btn btn-success">Update Profile</button>
+                          </form>
+                        </div></div>
+                      </div>
+                    </div></div>
+                  </div> <!-- / .row -->
+                </div> <!-- / .tab-pane -->
+                <div role="tabpanel" class="tab-pane fade" id="user-profile__shopping-cart">
+                  <div class="table-responsive">
+                     <i class="fa fa-shopping-cart"></i> My Orders
+                    <table class="table table-bordered shopping-cart__table">
+                      <thead>
+                        <tr>
+                          <th>Order Id</th>
+                          <th>Item</th>
+                          <th>Amount</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {% for o in po %}
+                        <tr class="js-shop__item">
+                          <td>
+                            <h6>#OD-{{o.i}}</h6>
+                          </td>
+                          <td>
+                            <div class="shopping-cart-item__title">
+                              <h6>Order Description</h6>
+                            </div>
+                            <div class="shopping-cart-item__desc">
+                              <b><u>Date:</u></b>{{o.ordered_date}}<br><b><u>Items:</u></b>{{o.items|linebreaks}}
+                            </div>
+                          </td>
+                          <td><h6>&#8377;<span class="js-shop-item__price">{{o.amount}}</span></h6></td>
+                          <td>
+                            <h6>{{o.status}}</h6>
+                          </td>
+                        </tr>
+                        {% endfor %}
+                      </tbody>
+                    </table>
+                  </div> <!-- / .table-responsive -->
+                </div> <!-- / .tab-pane -->
+              </div> <!-- / .tab-content -->
+            </div>
+          </div>
+        </div> <!-- / .row -->
+      </div>
+    </div> <!-- / .row -->
+  </div>
+  {% endblock %}

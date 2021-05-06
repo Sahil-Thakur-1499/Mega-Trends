@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Merchant payment page</title>
+</head>
+<body>
+{% if response %}
+<form action="{% url 'payment_success' pk=order.pk %}" method="POST">
+    <script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        data-key="rzp_test_I5tjrqng2eFKVX"
+        data-amount={{response.amount}}
+        data-currency={{response.currency}}
+        data-order_id={{response.id}}
+        data-buttontext="Pay with Razorpay"
+        data-name="Mega Trends"
+        data-description=":)"
+        data-image=""
+        data-prefill.name={{request.user.username}}
+        data-prefill.email={{request.user.email}}
+        data-theme.color="#F37254"
+    ></script>
+    <input type="hidden" custom="Hidden Element" name="hidden">
+    </form>
+{% endif %}
+</body>
+</html>

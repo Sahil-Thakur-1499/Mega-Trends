@@ -175,9 +175,9 @@ p.text-justify {
     <div class="d-flex justify-content-start align-items-center list py-1">
         <div class="mx-3"> <img src="{{item.product.image.url}}" alt="na" width="30" height="30"> </div>
         <div class="order-item">{{item.product.name}}</div>
-        <div class="float-right"><b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{item.qty}}x</b>
+        <div class="float-right"><b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{item.qty}}x</b>
         <b>{{item.product.price}}</b>
-        <b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&#8377;{{item.price}}</b></div>
+        <b>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;&#8377;{{item.price}}</b></div>
     </div>
     {% endfor %}
     <div class="pt-2 border-bottom mb-3"></div>    
@@ -211,7 +211,7 @@ p.text-justify {
         <div> Total: <b>&#8377;{{order.cart.amount}}  </b> </div>
     </div>
     <div class="float-right">
-        <div class="text-muted"><button class="text-white btn">Pay Now</button> </div>
+        <a href="{% url 'payment' pk=order.pk %}"><div class="text-muted"><button class="text-white btn">Pay Now</button> </div></a>
     </div>
 </div>
 {% endblock%}
