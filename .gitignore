@@ -8,7 +8,7 @@ __pycache__
 myenv/
 venv/
 pass.txt
-
+db.sqlite3
 # Static folder at project root
 /static/
 
